@@ -48,6 +48,35 @@ export const site = {
       { title: "Color Design", path: "/services" },
     ],
   },
+  servicesPage: {
+    intro: {
+      eyebrow: "WELCOME TO MERAKI STUDIO",
+      titleLines: ["Modern & Stylish", "Interior design for satisfaction"],
+      body:
+        "Meraki Studio is one of the most trusted design firms for those who want exceptional spaces and thoughtful interiors that reflect how they live.",
+      callTitle: "Let's Start the Design, Call us",
+      cta: "Contact Us",
+    },
+    gridIntro:
+      "Meraki Studio is one of the most popular for those who want to explore the world and create spaces they love.",
+    process: {
+      title: "We have very simple work Process",
+      stepDescription:
+        "Meraki Studio is one of the most popular for those who want to explore the",
+      steps: [
+        { number: "01", title: "We visit your place" },
+        { number: "02", title: "Start the Project" },
+        { number: "03", title: "Computer Design" },
+        { number: "04", title: "Hand over" },
+      ],
+    },
+    testimonials: {
+      title: "Expressions of our happy Customer",
+      body:
+        "Meraki Studio is one of the most trusted firms for those who want exceptional spaces and thoughtful design.",
+      cta: "View all",
+    },
+  },
   projects: {
     summary: "Meraki Studio is one of the most popular for",
   },

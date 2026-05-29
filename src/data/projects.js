@@ -38,7 +38,7 @@ export const projects = [
     description:
       "Integrated architecture and interior design for a modern residence—from exterior form to curated interior spaces.",
     image: faridabadExterior,
-    images: [faridabadExterior, faridabadDrawing, faridabadDining],
+    images: [faridabadExterior, faridabadDrawing, faridabadDrawing2, faridabadDining],
     featured: true,
     size: "large",
   },
@@ -53,6 +53,42 @@ export const projects = [
     size: "wide",
   },
 ];
+
+/** Flatten project images for masonry — title only on first image per project */
+const PORTFOLIO_IMAGE_VARIANTS = ["landscape", "square", "tall", "landscape"];
+
+export function getPortfolioMasonryItems(projectList) {
+  return projectList.flatMap((project) =>
+    project.images.map((image, index) => ({
+      id: `${project.id}-${index}`,
+      projectId: project.id,
+      image,
+      title: index === 0 ? project.title : null,
+      variant: PORTFOLIO_IMAGE_VARIANTS[index % PORTFOLIO_IMAGE_VARIANTS.length],
+    }))
+  );
+}
+
+/** Service page — 6 cards with images */
+export function getServicePageCards(servicesData) {
+  const items = [...servicesData.left, ...servicesData.right];
+  return items.map((item, index) => ({
+    ...item,
+    image: servicesSliderImages[index]?.src,
+    alt: servicesSliderImages[index]?.alt ?? item.title,
+    description: servicesData.itemDescription,
+  }));
+}
+
+/** Service page intro + process image pairs */
+export const servicePageImages = {
+  introMain: gurugramBedroom,
+  introSecondary: faridabadDrawing,
+  processBack: gurugramDining,
+  processFront: faridabadDining,
+  testimonialLeft: dlfLiving,
+  testimonialRight: gurugramBedroom,
+};
 
 /** Center column slider in Services — one image per service item (6 total) */
 export const servicesSliderImages = [

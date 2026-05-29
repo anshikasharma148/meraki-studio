@@ -17,7 +17,7 @@ export default function ImageReveal({
   duration = 1200,
   immediate = false,
   resetKey,
-  variant = "light",
+  variant = "dark",
   zoomIn = true,
   zoomScale = 1.15,
 }) {

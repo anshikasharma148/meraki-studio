@@ -1,44 +1,72 @@
-import PlaceholderPage from "./placeholders/PlaceholderPage";
-import ImageReveal from "../components/ui/ImageReveal";
+import { useState } from "react";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+import PageHero from "../components/layout/PageHero";
+import PortfolioGridItem from "../components/ui/PortfolioGridItem";
+import PortfolioProjectOverview from "../components/sections/PortfolioProjectOverview";
 import RevealGroup from "../components/ui/RevealGroup";
-import ScrollReveal from "../components/ui/ScrollReveal";
-import { projects } from "../data/projects";
+import { landingImages, projects, getPortfolioMasonryItems } from "../data/projects";
+import { pageContainer } from "../constants/layout";
 
 export default function Portfolio() {
+  const [view, setView] = useState("gallery");
+  const masonryItems = getPortfolioMasonryItems(projects);
+
   return (
-    <PlaceholderPage
-      title="Signature Designs, Lasting Impact"
-      paragraphs={[
-        "Discover how our multidisciplinary expertise brings harmony to every project. We invite you to explore our curated portfolio featuring modern residences, commercial & hospitality spaces, interior transformations, and landscapes & gardens.",
-      ]}
-    >
-      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {projects.map((project, i) => (
-          <RevealGroup key={project.id}>
-            <article>
-              <ImageReveal
-                src={project.image}
-                alt={project.title}
-                className="h-56 w-full"
-                delay={i * 80}
-              />
-              <ScrollReveal delay={120}>
-                <p className="mt-3 text-xs font-medium uppercase tracking-wider text-brand-sage">
-                  {project.category}
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={200}>
-                <h3 className="mt-1 font-serif text-xl font-bold text-brand-dark">
-                  {project.title}
-                </h3>
-              </ScrollReveal>
-              <ScrollReveal delay={280}>
-                <p className="mt-2 text-sm text-gray-500">{project.description}</p>
-              </ScrollReveal>
-            </article>
-          </RevealGroup>
-        ))}
+    <div className="flex min-h-screen flex-col">
+      <div className="bg-brand-hero">
+        <Header variant="dark" />
+        <PageHero
+          title="Our Projects"
+          backgroundImage={landingImages.heroMain}
+          breadcrumbs={[
+            { label: "Home", to: "/" },
+            { label: "Projects" },
+          ]}
+        />
       </div>
-    </PlaceholderPage>
+
+      <main className="flex-1 bg-white">
+        <section className="portfolio-section py-14 lg:py-20">
+          <RevealGroup key={view} className={pageContainer}>
+            {view === "gallery" ? (
+              <>
+                <div className="portfolio-masonry">
+                  {masonryItems.map((item, i) => (
+                    <PortfolioGridItem key={item.id} item={item} delay={i * 60} />
+                  ))}
+                </div>
+
+                <div className="mt-14 flex justify-center lg:mt-16">
+                  <button
+                    type="button"
+                    onClick={() => setView("overview")}
+                    className="portfolio-next-btn"
+                  >
+                    Next &gt;
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <PortfolioProjectOverview projects={projects} />
+
+                <div className="mt-14 flex justify-center lg:mt-16">
+                  <button
+                    type="button"
+                    onClick={() => setView("gallery")}
+                    className="portfolio-next-btn"
+                  >
+                    &lt; Back
+                  </button>
+                </div>
+              </>
+            )}
+          </RevealGroup>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 }

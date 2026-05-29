@@ -1,20 +1,35 @@
-import PlaceholderPage from "./placeholders/PlaceholderPage";
-import Button from "../components/ui/Button";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
+import PageHero from "../components/layout/PageHero";
+import ServicePageIntro from "../components/sections/ServicePageIntro";
+import ServicePageGrid from "../components/sections/ServicePageGrid";
+import ServicePageProcess from "../components/sections/ServicePageProcess";
+import ServicePageTestimonials from "../components/sections/ServicePageTestimonials";
+import { landingImages } from "../data/projects";
 
 export default function ServicesPage() {
   return (
-    <PlaceholderPage
-      title="From Concept to Completion"
-      paragraphs={[
-        "We offer a full suite of design services, ensuring that architecture, interiors, and landscapes are cohesively envisioned and expertly delivered.",
-        "Architecture — From custom homes to commercial spaces, we design architecture that balances form and function. Every project is rooted in context and crafted with precision.",
-        "Interior Design — We design interiors that tell your story. Our spaces are elegant, livable, and tailored to your lifestyle or brand identity.",
-        "Landscape Architecture — We transform outdoor spaces into environments that inspire—from private gardens to large-scale masterplans.",
-      ]}
-    >
-      <div className="mt-10">
-        <Button to="/contact">Request a Custom Proposal</Button>
+    <div className="flex min-h-screen flex-col">
+      <div className="bg-brand-hero">
+        <Header variant="dark" />
+        <PageHero
+          title="Our Services"
+          backgroundImage={landingImages.whyChooseMiddle}
+          breadcrumbs={[
+            { label: "Home", to: "/" },
+            { label: "Service" },
+          ]}
+        />
       </div>
-    </PlaceholderPage>
+
+      <main className="flex-1 bg-white">
+        <ServicePageIntro />
+        <ServicePageGrid />
+        <ServicePageProcess />
+        <ServicePageTestimonials />
+      </main>
+
+      <Footer />
+    </div>
   );
 }

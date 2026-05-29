@@ -9,13 +9,18 @@ export default function ProjectHoverImage({
   imageClassName = "object-cover",
   delay = 0,
   to = "/portfolio",
+  fill = true,
 }) {
+  const sizeClass = fill ? "h-full w-full" : "w-full";
+
   const block = (
-    <div className={`project-image-link-block h-full w-full overflow-hidden ${className}`}>
+    <div
+      className={`project-image-link-block overflow-hidden ${sizeClass} ${className}`}
+    >
       <ImageReveal
         src={src}
         alt={alt}
-        className="h-full w-full"
+        className={fill ? "h-full w-full" : "w-full"}
         imageClassName={`h-full w-full object-cover ${imageClassName}`}
         delay={delay}
       />
@@ -24,7 +29,7 @@ export default function ProjectHoverImage({
 
   if (to) {
     return (
-      <Link to={to} className="block h-full w-full">
+      <Link to={to} className={`block ${sizeClass}`}>
         {block}
       </Link>
     );
