@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { site } from "../../data/site";
+import { pageContainer } from "../../constants/layout";
 import RevealGroup from "../ui/RevealGroup";
 import ScrollReveal from "../ui/ScrollReveal";
 
 export default function Newsletter() {
+  const { title, description, placeholder, button, success } = site.newsletter;
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -15,44 +18,36 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-white py-20 lg:py-24">
-      <RevealGroup className="mx-auto max-w-3xl px-6 text-center lg:px-12">
+    <section className="subscribe-section bg-white py-16 lg:py-20">
+      <RevealGroup className={`${pageContainer} max-w-[720px] text-center`}>
         <ScrollReveal>
-          <h2 className="font-serif text-3xl font-bold text-brand-dark md:text-4xl">
-            Subscribe our Newsletter to get latest update and news
-          </h2>
+          <h2 className="subscribe-title">{title}</h2>
         </ScrollReveal>
-        <ScrollReveal delay={120}>
-          <p className="mt-4 font-sans text-sm leading-relaxed text-gray-500">
-            We recommend you subscribe to our newsletter. Enter your email below to
-            get our latest updates, news, and promotions.
-          </p>
+
+        <ScrollReveal delay={100}>
+          <p className="subscribe-text mx-auto mt-5 max-w-[560px]">{description}</p>
         </ScrollReveal>
+
         {submitted ? (
-          <ScrollReveal delay={200} className="mt-8">
-            <p className="font-sans text-brand-dark">
-              Thank you for subscribing!
-            </p>
+          <ScrollReveal delay={180} className="mt-10">
+            <p className="subscribe-success">{success}</p>
           </ScrollReveal>
         ) : (
-          <ScrollReveal delay={200} className="mt-10">
+          <ScrollReveal delay={180} className="mt-10">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-3 sm:flex-row sm:items-stretch"
+              className="subscribe-form mx-auto flex max-w-[560px] flex-col gap-3 sm:flex-row sm:items-stretch"
             >
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email here"
+                placeholder={placeholder}
                 required
-                className="flex-1 rounded-sm bg-gray-100 px-5 py-4 font-sans text-sm text-gray-700 outline-none focus:ring-2 focus:ring-brand-dark/20"
+                className="subscribe-input flex-1"
               />
-              <button
-                type="submit"
-                className="bg-brand-dark px-8 py-4 font-sans text-sm font-medium text-white transition-colors hover:bg-brand-hero"
-              >
-                Subscribe
+              <button type="submit" className="subscribe-button">
+                {button}
               </button>
             </form>
           </ScrollReveal>

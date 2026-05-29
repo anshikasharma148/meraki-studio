@@ -5,7 +5,7 @@ import logoImg from "../../assets/logo.png";
 const sizes = {
   default: "max-h-14 w-auto max-w-[320px]",
   hero: "max-h-[100px] w-auto max-w-[min(460px,44vw)] sm:max-h-[112px] lg:max-h-[136px] lg:max-w-[540px] xl:max-h-[152px] xl:max-w-[620px]",
-  footer: "max-h-14 w-auto max-w-[300px]",
+  footer: "max-h-16 w-auto max-w-[300px] lg:max-h-[80px] lg:max-w-[360px]",
 };
 
 export default function Logo({

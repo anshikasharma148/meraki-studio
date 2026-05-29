@@ -6,7 +6,6 @@ import Services from "../components/sections/Services";
 import WhyChoose from "../components/sections/WhyChoose";
 import Projects from "../components/sections/Projects";
 import Testimonials from "../components/sections/Testimonials";
-import Blog from "../components/sections/Blog";
 import Newsletter from "../components/sections/Newsletter";
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
         <WhyChoose />
         <Projects />
         <Testimonials />
-        <Blog />
         <Newsletter />
       </main>
       <Footer />

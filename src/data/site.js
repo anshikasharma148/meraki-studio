@@ -48,6 +48,34 @@ export const site = {
       { title: "Color Design", path: "/services" },
     ],
   },
+  projects: {
+    summary: "Meraki Studio is one of the most popular for",
+  },
+  testimonials: {
+    title: "Expressions of our happy clients",
+    items: [
+      {
+        quote:
+          "Meraki Studio transformed our home with incredible attention to detail. Their integrated approach to architecture and interiors delivered a space that truly reflects how we live.",
+        name: "Rajesh Mehta",
+        company: "Residential Client",
+      },
+      {
+        quote:
+          "Meraki Studio is one of the most trusted firms for those who want exceptional spaces and thoughtful design that reflects how they live and work.",
+        name: "Priya Sharma",
+        company: "Commercial Client",
+      },
+    ],
+  },
+  newsletter: {
+    title: "Subscribe our Newsletter to get latest update and news",
+    description:
+      "We recommend you subscribe to our newsletter, enter your email below to receive updates.",
+    placeholder: "Enter your email here",
+    button: "Subscribe",
+    success: "Thank you! Your submission has been received!",
+  },
   /* Reference UI copy above; site.tagline used elsewhere */
   servicesLine: "Architecture | Interior Design | Landscape Architecture",
   address:
@@ -78,12 +106,12 @@ export const site = {
   ],
   footer: {
     description:
-      "Meraki Studio is a multidisciplinary design firm creating timeless architecture, curated interiors, and transformative landscapes across India and beyond.",
+      "Meraki Studio is a trusted design firm creating thoughtful architecture, interiors, and landscapes.",
     companyLinks: [
       { label: "About Us", path: "/about" },
       { label: "Our Services", path: "/services" },
       { label: "Latest Projects", path: "/portfolio" },
-      { label: "Blog Post", path: "/blog" },
+      { label: "Our Team", path: "/about" },
       { label: "Contact us", path: "/contact" },
     ],
     infoLinks: [
@@ -91,5 +119,6 @@ export const site = {
       { label: "Privacy Policy", path: "/contact" },
       { label: "Terms of Service", path: "/contact" },
     ],
+    copyright: "All rights reserved.",
   },
 };

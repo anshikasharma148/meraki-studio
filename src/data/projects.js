@@ -72,6 +72,13 @@ export const whyChooseSliderImages = [
   { src: gurugramBedroom, alt: "Bedroom interior" },
 ];
 
+/** Testimonials collage — right column */
+export const testimonialCollageImages = {
+  main: dlfGuest,
+  top: gurugramBedroom,
+  bottom: faridabadDining,
+};
+
 export const landingImages = {
   heroMain: faridabadDrawing2,
   heroSecondary: dlfDining,

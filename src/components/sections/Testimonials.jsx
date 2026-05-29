@@ -1,36 +1,36 @@
+import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { site } from "../../data/site";
+import { testimonialCollageImages } from "../../data/projects";
+import { pageContainer } from "../../constants/layout";
 import ImageReveal from "../ui/ImageReveal";
 import RevealGroup from "../ui/RevealGroup";
 import ScrollReveal from "../ui/ScrollReveal";
 
-const collageImages = [
-  {
-    src: "https://images.unsplash.com/photo-1552322174-3ba004092f7d?w=500&q=80",
-    className: "h-72 w-full rounded-tl-[80px] rounded-br-[80px]",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=400&q=80",
-    className: "h-40 w-full rounded-tr-[60px]",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400&q=80",
-    className: "h-40 w-full rounded-br-[60px]",
-  },
-];
+const avatarUrl =
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80";
 
 export default function Testimonials() {
+  const { title, items } = site.testimonials;
+  const [active, setActiveIndex] = useState(0);
+  const current = items[active] ?? items[0];
+
+  const goPrev = () =>
+    setActiveIndex((i) => (i - 1 + items.length) % items.length);
+  const goNext = () => setActiveIndex((i) => (i + 1) % items.length);
+
   return (
-    <section className="bg-white py-20 lg:py-28">
-      <RevealGroup className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div>
-            <ScrollReveal>
-              <h2 className="font-serif text-3xl font-bold text-brand-dark md:text-4xl">
-                Expressions of our happy clients
-              </h2>
+    <section className="testimonial-section relative bg-white py-16 lg:py-24">
+      <RevealGroup className={pageContainer}>
+        <div className="testimonial-wrapper flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+          {/* Left — copy + slider controls */}
+          <div className="testimonial-left w-full max-w-[540px]">
+            <ScrollReveal className="testimonial-title-block mb-8 lg:mb-[55px]">
+              <h2 className="testimonial-title">{title}</h2>
             </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <div className="mt-6 flex gap-1">
+
+            <ScrollReveal delay={80}>
+              <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
@@ -39,70 +39,82 @@ export default function Testimonials() {
                 ))}
               </div>
             </ScrollReveal>
-            <ScrollReveal delay={180}>
-              <blockquote className="mt-6 font-sans text-base leading-relaxed text-gray-500">
-                &ldquo;Meraki Studio transformed our home with incredible attention
-                to detail. Their integrated approach to architecture and interiors
-                delivered a space that truly reflects how we live. We couldn&apos;t
-                be happier with the result.&rdquo;
+
+            <ScrollReveal delay={160}>
+              <blockquote className="testimonial-text mt-6 max-w-[419px]">
+                &ldquo;{current.quote}&rdquo;
               </blockquote>
             </ScrollReveal>
-            <ScrollReveal delay={260} className="mt-8 flex items-center justify-between">
-              <div className="flex items-center gap-4">
+
+            <ScrollReveal delay={240} className="mt-8 flex items-center justify-between gap-4">
+              <div className="client-meta flex items-center gap-[15px]">
                 <ImageReveal
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80"
-                  alt="Client"
+                  src={avatarUrl}
+                  alt={current.name}
                   className="h-12 w-12 shrink-0 rounded-full"
+                  zoomIn={false}
                 />
                 <div>
-                  <p className="font-serif font-semibold text-brand-dark">
-                    Rajesh Mehta
-                  </p>
-                  <p className="text-sm text-gray-500">Residential Client</p>
+                  <p className="client-name">{current.name}</p>
+                  <p className="client-title">{current.company}</p>
                 </div>
               </div>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
+
+              {items.length > 1 && (
+                <div className="flex shrink-0 gap-2">
+                  <button
+                    type="button"
+                    onClick={goPrev}
+                    className="testimonial-arrow flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-gray-200"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goNext}
+                    className="testimonial-arrow flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-gray-200"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              )}
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-1 row-span-2 overflow-hidden rounded-tl-[80px] rounded-br-[80px]">
-              <ImageReveal
-                src={collageImages[0].src}
-                alt=""
-                className={collageImages[0].className}
-              />
-            </div>
-            <div className="overflow-hidden rounded-tr-[60px]">
-              <ImageReveal
-                src={collageImages[1].src}
-                alt=""
-                className={collageImages[1].className}
-                delay={120}
-              />
-            </div>
-            <div className="overflow-hidden rounded-br-[60px]">
-              <ImageReveal
-                src={collageImages[2].src}
-                alt=""
-                className={collageImages[2].className}
-                delay={220}
-              />
+          {/* Right — image collage */}
+          <div className="testimonial-gallery w-full max-w-[582px] lg:shrink-0">
+            <div className="testimonial-thumb-inner grid grid-cols-[1.05fr_0.95fr] gap-[30px]">
+              <div className="testimonial-thumb-left row-span-2 overflow-hidden rounded-tl-[70px] rounded-br-[70px]">
+                <ImageReveal
+                  src={testimonialCollageImages.main}
+                  alt="Interior design showcase"
+                  className="h-full min-h-[320px] w-full sm:min-h-[360px] lg:min-h-[400px]"
+                  imageClassName="h-full min-h-[inherit] object-cover"
+                  delay={100}
+                />
+              </div>
+
+              <div className="testimonial-thumb-right-top overflow-hidden rounded-tl-[70px]">
+                <ImageReveal
+                  src={testimonialCollageImages.top}
+                  alt="Bedroom interior"
+                  className="aspect-[4/3] w-full sm:aspect-auto sm:h-[185px]"
+                  imageClassName="h-full w-full object-cover"
+                  delay={180}
+                />
+              </div>
+
+              <div className="testimonial-thumb-right-bottom overflow-hidden rounded-br-[70px]">
+                <ImageReveal
+                  src={testimonialCollageImages.bottom}
+                  alt="Dining interior"
+                  className="aspect-[4/3] w-full sm:aspect-auto sm:h-[185px]"
+                  imageClassName="h-full w-full object-cover"
+                  delay={260}
+                />
+              </div>
             </div>
           </div>
         </div>
