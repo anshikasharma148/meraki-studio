@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+@theme {
+  /* Reference Decoral / screenshot palette */
+  --color-brand-dark: #244d4d;
+  --color-brand-hero: #244d4d;
+  --color-brand-sage: #6d9a72;
+  --color-brand-mint: #f0f9fa;
+  --color-brand-gold: #c9a227;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-gray-600 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-brand-dark;
+  }
+}
+
+@layer utilities {
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.45;
+  }
+
+  /* Straight vertical wipe right → left (edge is a line, not arch/container shape) */
+  .image-reveal-overlay {
+    clip-path: inset(0 0 0 0);
+    transition-property: clip-path;
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: clip-path;
+  }
+
+  .image-reveal-overlay--active {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .image-reveal-img {
+    transform: scale(var(--reveal-zoom, 1.15));
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+  }
+
+  .image-reveal-img--active {
+    transform: scale(1);
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .scroll-reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Services section — Decoral reference specs */
+  .services-section-title {
+    margin-bottom: 0;
+    font-family: var(--font-serif);
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #244d4d;
+  }
+
+  @media (min-width: 1024px) {
+    .services-section-title {
+      font-size: 2.65rem;
+    }
+  }
+
+  .service-link-block {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #232323;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .service-link-block:hover {
+    color: #244d4d;
+  }
+
+  .service-link {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 32px;
+    color: inherit;
+  }
+
+  @media (min-width: 1280px) {
+    .service-link {
+      font-size: 28px;
+      line-height: 34px;
+    }
+  }
+
+  /* Why Choose / feature section — Decoral reference */
+  .feature-section-title {
+    margin-bottom: 20px;
+    font-family: var(--font-serif);
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #244d4d;
+  }
+
+  @media (min-width: 1024px) {
+    .feature-section-title {
+      font-size: 2.65rem;
+    }
+  }
+
+  .feature-section-intro {
+    max-width: 412px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #595959;
+  }
+
+  .single-feature {
+    display: flex;
+    max-width: 404px;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .feature-title {
+    margin: 0 0 14px;
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 32px;
+    color: #232323;
+  }
+
+  @media (min-width: 1280px) {
+    .feature-title {
+      font-size: 28px;
+      line-height: 34px;
+    }
+  }
+
+  .feature-text {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #595959;
+    letter-spacing: 0.04em;
+  }
+
+  .feature-block {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .service-summary-text {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #595959;
+    letter-spacing: 0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .image-reveal-overlay {
+      display: none;
+    }
+
+    .image-reveal-img {
+      transform: none;
+      transition: none;
+    }
+
+    .scroll-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
